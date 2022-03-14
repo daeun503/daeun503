@@ -40,7 +40,7 @@ Studying
 ### 프로젝트
 
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=daeun503&repo=URLS&theme=buefy)](https://github.com/daeun503/URLS)
-[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=daeun503&repo=HomeFarmT&theme=buefy)](https://github.com/daeun503/HomeFarmT)
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=daeun503&repo=HomeFarmT_README&theme=buefy)](https://github.com/daeun503/HomeFarmT_README)
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=daeun503&repo=Jubging&theme=buefy)](https://github.com/daeun503/Jubging)
 
 <br/>
