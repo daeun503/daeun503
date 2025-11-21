@@ -1,8 +1,9 @@
-![reversal](https://capsule-render.vercel.app/api?type=rect&text=Daeun&fontAlign=30&fontSize=30&desc=Server%20Developer&descAlign=50&descAlignY=50&theme=radical)
+![reversal](https://capsule-render.vercel.app/api?type=rect&text=Daeun%20·%20Zero&fontAlign=30&fontSize=30&desc=Server%20Developer&descAlign=60&descAlignY=50&theme=radical)
 
 <br/>
 
-- Daeun · Server Developer
+- Daeun · Zero
+- Server Developer
 - ❤︎ Python
 
 <br/>
