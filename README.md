@@ -1,8 +1,7 @@
 ![reversal](https://capsule-render.vercel.app/api?type=rect&text=Daeun&fontAlign=30&fontSize=30&desc=Server%20Developer&descAlign=50&descAlignY=50&theme=radical)
 
-
-
-<img src="https://img.shields.io/badge/Python-3766AB?style=flat&logo=Python&logoColor=white"/>
+- Daeun · Server Developer
+- ❤︎ Python
 
 
 
