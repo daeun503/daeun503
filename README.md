@@ -3,8 +3,6 @@
 - Daeun · Server Developer
 - ❤︎ Python
 
-
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/daeun503/daeun503/output/pacman-contribution-graph-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/daeun503/daeun503/output/pacman-contribution-graph.svg">
