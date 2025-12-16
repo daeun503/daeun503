@@ -1,0 +1,104 @@
+name: build profile assets on self-hosted runner
+
+on:
+  schedule:
+    - cron: "0 */24 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  generate-pacman-graph-widget:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: generate pacman-contribution-graph.svg
+        uses: abozanona/pacman-contribution-graph@main
+        with:
+          github_user_name: ${{ github.repository_owner }}
+
+      - name: Upload dist artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-assets
+          path: dist
+          if-no-files-found: ignore
+
+
+  generate-youtube-music-widget:
+    runs-on: self-hosted
+    needs: generate-pacman-graph-widget
+    timeout-minutes: 10
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Checkout widget repo
+        uses: actions/checkout@v4
+        with:
+          repository: daeun503/profile-music-widget
+          ref: main
+          path: widget
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download dist artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-assets
+          path: widget/dist
+
+      - name: Verify environment
+        run: |
+          python3 --version
+          ffmpeg -version
+          yt-dlp --version
+
+      - name: generate youtube music widget (gif bg)
+        env:
+          YT_PLAYLIST_ID: PLrpWLWlmavXBXidc7niUbK3dK39KVnugD
+          YT_THEME: default.svg
+          YT_IS_GIF_BG: true
+        run: |
+          python3 widget/generate_widget.py
+
+      - name: Upload dist artifacts (with youtube music widget)
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-final
+          path: widget/dist
+
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: generate-youtube-music-widget
+    timeout-minutes: 10
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download dist artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-final
+          path: dist
+
+      - name: Deploy dist to output branch
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+          keep_history: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

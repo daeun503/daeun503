@@ -13,3 +13,27 @@
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/daeun503/daeun503/output/pacman-contribution-graph.svg">
   <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/daeun503/daeun503/output/pacman-contribution-graph.svg">
 </picture>
+
+
+<br/>
+<br/>
+<br/>
+
+<div align="center">
+
+  <p>
+    ᴛᴏᴅᴀʏ ᴘɪᴄᴋ<br/>
+    ▾
+  </p>
+
+<a href="https://www.youtube.com/playlist?list=PLrpWLWlmavXBXidc7niUbK3dK39KVnugD" target="_blank" rel="noopener noreferrer">
+    <img src="https://raw.githubusercontent.com/daeun503/daeun503/output/youtube-music-widget.svg?v=1234" alt="playing" />
+<!-- 
+    <img src="https://daeun503.github.io/daeun503/youtube-music-widget.svg" alt="youtube playlist" />
+-->
+</a>
+
+</div>
+
+<br/>
+<br/>
