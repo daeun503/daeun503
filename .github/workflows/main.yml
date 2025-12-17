@@ -24,7 +24,7 @@ jobs:
           github_user_name: ${{ github.repository_owner }}
 
       - name: generate youtube music widget
-        uses: daeun503/profile-music-widget@main
+        uses: daeun503/profile-music-widget@v1
         with:
           playlist_id: PLrpWLWlmavXBXidc7niUbK3dK39KVnugD
           theme: default.svg
