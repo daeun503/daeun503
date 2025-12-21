@@ -8,12 +8,37 @@ on:
     branches: [main]
 
 jobs:
+  check-self-hosted-runner:
+    runs-on: ubuntu-latest
+    outputs:
+      runner_online: ${{ steps.check.outputs.online }}
+    steps:
+      - name: Check self-hosted runner status
+        id: check
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          set -e
+          runners=$(curl -s \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${{ github.repository }}/actions/runners)
+
+          online=$(echo "$runners" | jq '[.runners[] | select(.status=="online")] | length')
+          if [ "$online" -gt 0 ]; then
+            echo "online=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "online=false" >> "$GITHUB_OUTPUT"
+          fi
+          echo "online runner count = $online"
+
+
   generate-pacman-graph-widget:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
       contents: write
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,11 +58,13 @@ jobs:
 
   generate-youtube-music-widget:
     runs-on: [self-hosted, docker]
-    needs: generate-pacman-graph-widget
+    needs:
+      - generate-pacman-graph-widget
+      - check-self-hosted-runner
+    if: needs.check-self-hosted-runner.outputs.runner_online == 'true'
     timeout-minutes: 10
     permissions:
       contents: write
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -83,7 +110,6 @@ jobs:
     timeout-minutes: 10
     permissions:
       contents: write
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
