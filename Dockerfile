@@ -4,12 +4,18 @@ ARG DEBIAN_FRONTEND=noninteractive
 ARG RUNNER_VERSION=2.329.0
 ENV VENV_PATH=/opt/venv
 
+# system deps
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ca-certificates curl git unzip tar gzip  \
+    ca-certificates curl git unzip tar gzip \
     ffmpeg \
-    yt-dlp \
     python3 python3-venv python3-pip \
   && rm -rf /var/lib/apt/lists/*
+
+# Install latest yt-dlp from upstream (recommended)
+RUN curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp \
+      -o /usr/local/bin/yt-dlp \
+  && chmod +x /usr/local/bin/yt-dlp \
+  && yt-dlp --version
 
 # python deps (venv install)
 RUN python3 -m venv ${VENV_PATH} \
